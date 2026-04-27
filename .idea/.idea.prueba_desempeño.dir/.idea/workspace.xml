@@ -13,13 +13,17 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59c4e31f-331c-4c31-b5e3-6242e8cda2ce" name="Changes" comment="" />
+    <list default="true" id="59c4e31f-331c-4c31-b5e3-6242e8cda2ce" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.prueba_desempeño.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.prueba_desempeño.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Desempeno/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/Program.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="INCOMING_COMMITS_CHECK_STRATEGY" value="FETCH" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory"><![CDATA[{
@@ -65,7 +69,8 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "cidr.known.project.marker": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
+    "git.auto.fetch.suggestion.counter": "1",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -105,7 +110,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1777317910952</updated>
-      <workItem from="1777317912076" duration="3086000" />
+      <workItem from="1777317912076" duration="4581000" />
     </task>
     <task id="LOCAL-00001" summary="firts commit">
       <option name="closed" value="true" />
@@ -131,7 +136,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777321020971</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="nose">
+      <option name="closed" value="true" />
+      <created>1777321294302</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1777321294302</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -147,9 +160,20 @@
     </option>
     <option name="TAB_STATES">
       <map>
-        <entry key="d106d685-a8e5-4153-adc1-e689be407213">
+        <entry key="MAIN">
           <value>
             <State />
+          </value>
+        </entry>
+        <entry key="d106d685-a8e5-4153-adc1-e689be407213">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -160,7 +184,8 @@
     <MESSAGE value="firts commit" />
     <MESSAGE value="doc" />
     <MESSAGE value="uptadate services" />
-    <option name="LAST_COMMIT_MESSAGE" value="uptadate services" />
+    <MESSAGE value="nose" />
+    <option name="LAST_COMMIT_MESSAGE" value="nose" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
