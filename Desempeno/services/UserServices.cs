@@ -1,12 +1,13 @@
 using Desempeno.models;
-using Desempeno.services;
+using Desempeno.Data;
+
 namespace Desempeno.services;
 
 public class UserServices
 {
     private readonly AppDbContext _context;
 
-    // Corrección del constructor: ahora es correcto
+    
     public UserServices(AppDbContext context)
     {
         _context = context;
@@ -14,7 +15,7 @@ public class UserServices
 
     public ServiceResponse<Users> RegistrarUsuario(Users newUser)
     {
-        bool existe = _context.Users.Any(u => u.Documento == newUser.Documento || u.Email == newUser.Email);
+        bool existe = _context.Users.Any(u => u.Id == newUser.Id || u.Email == newUser.Email);
         
         if (existe)
         {
@@ -41,9 +42,9 @@ public class UserServices
             return new ServiceResponse<Users> { Success = false, Message = "Usuario no encontrado." };
 
         
-        userEdit.Nombre = userModificado.Name;
+        userEdit.Name = userModificado.Name;
         userEdit.Email = userModificado.Email;
-        userEdit.Telefono = userModificado.Phone;
+        userEdit.Phone = userModificado.Phone;
 
         _context.SaveChanges();
         

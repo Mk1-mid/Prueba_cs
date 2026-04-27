@@ -18,22 +18,15 @@ namespace Desempeno.Data
 
             modelBuilder.Entity<Reserv>()
                 .HasOne(r => r.usuario)
-                .WithMany(u => u.reservas)
+                .WithMany()
                 .HasForeignKey(r => r.IdUser)
                 .OnDelete(DeleteBehavior.Restrict); 
 
             modelBuilder.Entity<Reserv>()
                 .HasOne(r => r.sportSpace)
-                .WithMany(s => s.reservas)
+                .WithMany()
                 .HasForeignKey(r => r.IdSpace)
                 .OnDelete(DeleteBehavior.Restrict);
-
-            // 4. MUY IMPORTANTE: Configuración del Enum Status
-            // Esto asegura que en la base de datos se guarde el texto (string)
-            // en lugar de un número (0, 1, 2)
-            modelBuilder.Entity<Reserv>()
-                .Property(r => r.Status)
-                .HasConversion<string>();
         }
     }
 }
