@@ -23,7 +23,7 @@ public class AppDbContext :DbContext
         modelBuilder.Entity<Reserv>()
             .HasOne(r => r.sportSpace)
             .WithMany(s => s.reservas)
-            .HasForeignKey(r => r.sportSpace);
+            .HasForeignKey(r => r.IdSpace);
             
             
     
