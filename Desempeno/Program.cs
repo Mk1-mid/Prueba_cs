@@ -51,7 +51,7 @@ static void MenuUsuarios()
     } while (subOpcion != "4");
 }
 
-public static  void MenuReservas()
+public static void MenuReservas()
 {
     string subOpcion;
     do
@@ -64,7 +64,7 @@ public static  void MenuReservas()
         Console.WriteLine("4. cancelar reserva");
         Console.WriteLine("5. volver");
         subOpcion = Console.ReadLine();
-        switch(subOpcion)
+        switch (subOpcion)
         {
             case "1":
                 break;
@@ -75,19 +75,33 @@ public static  void MenuReservas()
             case "4":
                 break;
         }
-    } while (subOpcion!="5");
+    } while (subOpcion != "5");
 }
+
 public static void Menuespacione()
-{
-    string subOpcion;
-    do
     {
-        Console.Clear();
-        Console.WriteLine("--- GESTIÓN DE Espacio ---");
-        Console.WriteLine("1. crear Espacio");
-        Console.WriteLine("2. editar Espacio");
-        Console.WriteLine("3. Listar reservas por espacios");
-        Console.WriteLine("4. cancelar reserva");
-        Console.WriteLine("5. volver");
-    }while(subOpcion)
-}
+        string subOpcion;
+        do
+        {
+            Console.Clear();
+            Console.WriteLine("--- GESTIÓN DE Espacio ---");
+            Console.WriteLine("1. crear Espacio");
+            Console.WriteLine("2. editar Espacio");
+            Console.WriteLine("3. Listar reservas por espacios");
+            Console.WriteLine("4. cancelar reserva");
+            Console.WriteLine("5. volver");
+            subOpcion = Console.ReadLine();
+            switch (subOpcion)
+            {
+                case "1":
+                    break;
+                case "2":
+                    break;
+                case "3":
+                    break;
+                case "4":
+                    break;
+
+            }
+        } while (subOpcion != "5");
+    }

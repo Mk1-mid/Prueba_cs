@@ -14,7 +14,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59c4e31f-331c-4c31-b5e3-6242e8cda2ce" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.prueba_desempeño.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.prueba_desempeño.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Desempeno/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -110,7 +109,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1777317910952</updated>
-      <workItem from="1777317912076" duration="7697000" />
+      <workItem from="1777317912076" duration="8134000" />
     </task>
     <task id="LOCAL-00001" summary="firts commit">
       <option name="closed" value="true" />
@@ -152,7 +151,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777322725740</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Add Dbcontext">
+      <option name="closed" value="true" />
+      <created>1777326186243</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1777326186243</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,7 +201,8 @@
     <MESSAGE value="uptadate services" />
     <MESSAGE value="nose" />
     <MESSAGE value="add menu" />
-    <option name="LAST_COMMIT_MESSAGE" value="add menu" />
+    <MESSAGE value="Add Dbcontext" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Dbcontext" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -211,19 +219,6 @@
           <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="3" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Desempeno/services/AppDbContext.cs</url>
-          <line>20</line>
-          <properties documentPath="$PROJECT_DIR$/Desempeno/services/AppDbContext.cs" containingFunctionPresentation="Lambda expression inside Method 'OnModelCreating'">
-            <startOffsets>
-              <option value="653" />
-            </startOffsets>
-            <endOffsets>
-              <option value="661" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
