@@ -14,9 +14,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59c4e31f-331c-4c31-b5e3-6242e8cda2ce" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.prueba_desempeño.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.prueba_desempeño.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Desempeno/services/AppDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/services/AppDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Desempeno/services/gestion.cs" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Desempeno/services/ServiceResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Desempeno/services/AppDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/Data/AppDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Desempeno/services/UserServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/services/UserServices.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +43,7 @@
     <setting file="file://$PROJECT_DIR$/Desempeno/models/Reserv.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Desempeno/models/SportSpace.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Desempeno/models/Users.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Desempeno/services/gestion.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Desempeno/services/ServiceResponse.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -111,7 +111,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1777317910952</updated>
-      <workItem from="1777317912076" duration="10027000" />
+      <workItem from="1777317912076" duration="11078000" />
     </task>
     <task id="LOCAL-00001" summary="firts commit">
       <option name="closed" value="true" />
@@ -169,7 +169,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777326598448</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="add Services">
+      <option name="closed" value="true" />
+      <created>1777328885855</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1777328885855</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -197,7 +205,8 @@
     <MESSAGE value="add menu" />
     <MESSAGE value="Add Dbcontext" />
     <MESSAGE value="act" />
-    <option name="LAST_COMMIT_MESSAGE" value="act" />
+    <MESSAGE value="add Services" />
+    <option name="LAST_COMMIT_MESSAGE" value="add Services" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
