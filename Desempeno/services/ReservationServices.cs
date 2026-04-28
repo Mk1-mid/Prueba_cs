@@ -1,16 +1,15 @@
 using Desempeno.models;
-using Desempeno.Data;
-using Microsoft.EntityFrameworkCore;
+using Desempeno.repositories;
 
 namespace Desempeno.services;
 
 public class ReservationServices
 {
-    private readonly AppDbContext _context;
+    private readonly IReservationRepository _reservationRepository;
 
-    public ReservationServices(AppDbContext context)
+    public ReservationServices(IReservationRepository reservationRepository)
     {
-        _context = context;
+        _reservationRepository = reservationRepository;
     }
 
     public ServiceResponse<Reserv> RegistrarReserva(Reserv newReserv)
@@ -24,40 +23,38 @@ public class ReservationServices
         if (newReserv.end <= newReserv.strat)
             return new ServiceResponse<Reserv> { Success = false, Message = "La hora de fin debe ser mayor a la hora de inicio." };
 
-        bool usuarioExiste = _context.Users.Any(u => u.Id == newReserv.IdUser);
+        bool usuarioExiste = _reservationRepository.UserExists(newReserv.IdUser);
         if (!usuarioExiste)
             return new ServiceResponse<Reserv> { Success = false, Message = "Usuario no encontrado." };
 
-        bool espacioExiste = _context.SportSpaces.Any(s => s.Id == newReserv.IdSpace);
+        bool espacioExiste = _reservationRepository.SpaceExists(newReserv.IdSpace);
         if (!espacioExiste)
             return new ServiceResponse<Reserv> { Success = false, Message = "Espacio no encontrado." };
 
-        bool solapamientoEspacio = _context.Reservas.Any(r =>
-            r.IdSpace == newReserv.IdSpace &&
-            r.Date == newReserv.Date &&
-            r.status != "Cancelada" &&
-            r.strat < newReserv.end &&
-            r.end > newReserv.strat);
+        bool solapamientoEspacio = _reservationRepository.HasOverlapForSpace(
+            newReserv.IdSpace,
+            newReserv.Date,
+            newReserv.strat,
+            newReserv.end);
 
         if (solapamientoEspacio)
             return new ServiceResponse<Reserv> { Success = false, Message = "El espacio ya tiene una reserva en ese horario." };
 
-        bool solapamientoUsuario = _context.Reservas.Any(r =>
-            r.IdUser == newReserv.IdUser &&
-            r.Date == newReserv.Date &&
-            r.status != "Cancelada" &&
-            r.strat < newReserv.end &&
-            r.end > newReserv.strat);
+        bool solapamientoUsuario = _reservationRepository.HasOverlapForUser(
+            newReserv.IdUser,
+            newReserv.Date,
+            newReserv.strat,
+            newReserv.end);
 
         if (solapamientoUsuario)
             return new ServiceResponse<Reserv> { Success = false, Message = "El usuario ya tiene una reserva en ese horario." };
 
         newReserv.status = "Programada";
 
-        _context.Reservas.Add(newReserv);
-        _context.SaveChanges();
+        _reservationRepository.Add(newReserv);
+        _reservationRepository.SaveChanges();
 
-        var usuario = _context.Users.FirstOrDefault(u => u.Id == newReserv.IdUser);
+        var usuario = _reservationRepository.GetUserById(newReserv.IdUser);
         Console.WriteLine(
             $"Correo enviado a {usuario?.Email}. Reserva creada para el {newReserv.Date:yyyy-MM-dd} de {newReserv.strat:hh\\:mm} a {newReserv.end:hh\\:mm}.");
 
@@ -66,45 +63,36 @@ public class ReservationServices
 
     public ServiceResponse<List<Reserv>> ListarReservas()
     {
-        var lista = _context.Reservas
-            .Include(r => r.usuario)
-            .Include(r => r.sportSpace)
-            .ToList();
+        var lista = _reservationRepository.GetAllWithRelations();
 
         return new ServiceResponse<List<Reserv>> { Success = true, Data = lista };
     }
 
     public ServiceResponse<List<Reserv>> ListarReservasPorUsuario(int idUsuario)
     {
-        bool usuarioExiste = _context.Users.Any(u => u.Id == idUsuario);
+        bool usuarioExiste = _reservationRepository.UserExists(idUsuario);
         if (!usuarioExiste)
             return new ServiceResponse<List<Reserv>> { Success = false, Message = "Usuario no encontrado." };
 
-        var lista = _context.Reservas
-            .Include(r => r.sportSpace)
-            .Where(r => r.IdUser == idUsuario)
-            .ToList();
+        var lista = _reservationRepository.GetByUserWithSpace(idUsuario);
 
         return new ServiceResponse<List<Reserv>> { Success = true, Data = lista };
     }
 
     public ServiceResponse<List<Reserv>> ListarReservasPorEspacio(int idEspacio)
     {
-        bool espacioExiste = _context.SportSpaces.Any(s => s.Id == idEspacio);
+        bool espacioExiste = _reservationRepository.SpaceExists(idEspacio);
         if (!espacioExiste)
             return new ServiceResponse<List<Reserv>> { Success = false, Message = "Espacio no encontrado." };
 
-        var lista = _context.Reservas
-            .Include(r => r.usuario)
-            .Where(r => r.IdSpace == idEspacio)
-            .ToList();
+        var lista = _reservationRepository.GetBySpaceWithUser(idEspacio);
 
         return new ServiceResponse<List<Reserv>> { Success = true, Data = lista };
     }
 
     public ServiceResponse<Reserv> CancelarReserva(int id)
     {
-        var reserva = _context.Reservas.FirstOrDefault(x => x.Id == id);
+        var reserva = _reservationRepository.GetById(id);
         if (reserva == null)
             return new ServiceResponse<Reserv> { Success = false, Message = "Reserva no encontrada." };
 
@@ -112,14 +100,14 @@ public class ReservationServices
             return new ServiceResponse<Reserv> { Success = false, Message = "La reserva ya está cancelada." };
 
         reserva.status = "Cancelada";
-        _context.SaveChanges();
+        _reservationRepository.SaveChanges();
 
         return new ServiceResponse<Reserv> { Success = true, Data = reserva, Message = "Reserva cancelada." };
     }
 
     public ServiceResponse<Reserv> EditarReserva(int id, Reserv reservaModificada)
     {
-        var reservaEdit = _context.Reservas.FirstOrDefault(x => x.Id == id);
+        var reservaEdit = _reservationRepository.GetById(id);
         if (reservaEdit == null)
             return new ServiceResponse<Reserv> { Success = false, Message = "Reserva no encontrada." };
 
@@ -132,32 +120,30 @@ public class ReservationServices
         if (reservaModificada.end <= reservaModificada.strat)
             return new ServiceResponse<Reserv> { Success = false, Message = "La hora de fin debe ser mayor a la hora de inicio." };
 
-        bool usuarioExiste = _context.Users.Any(u => u.Id == reservaModificada.IdUser);
+        bool usuarioExiste = _reservationRepository.UserExists(reservaModificada.IdUser);
         if (!usuarioExiste)
             return new ServiceResponse<Reserv> { Success = false, Message = "Usuario no encontrado." };
 
-        bool espacioExiste = _context.SportSpaces.Any(s => s.Id == reservaModificada.IdSpace);
+        bool espacioExiste = _reservationRepository.SpaceExists(reservaModificada.IdSpace);
         if (!espacioExiste)
             return new ServiceResponse<Reserv> { Success = false, Message = "Espacio no encontrado." };
 
-        bool solapamientoEspacio = _context.Reservas.Any(r =>
-            r.Id != id &&
-            r.IdSpace == reservaModificada.IdSpace &&
-            r.Date == reservaModificada.Date &&
-            r.status != "Cancelada" &&
-            r.strat < reservaModificada.end &&
-            r.end > reservaModificada.strat);
+        bool solapamientoEspacio = _reservationRepository.HasOverlapForSpace(
+            reservaModificada.IdSpace,
+            reservaModificada.Date,
+            reservaModificada.strat,
+            reservaModificada.end,
+            id);
 
         if (solapamientoEspacio)
             return new ServiceResponse<Reserv> { Success = false, Message = "El espacio ya tiene una reserva en ese horario." };
 
-        bool solapamientoUsuario = _context.Reservas.Any(r =>
-            r.Id != id &&
-            r.IdUser == reservaModificada.IdUser &&
-            r.Date == reservaModificada.Date &&
-            r.status != "Cancelada" &&
-            r.strat < reservaModificada.end &&
-            r.end > reservaModificada.strat);
+        bool solapamientoUsuario = _reservationRepository.HasOverlapForUser(
+            reservaModificada.IdUser,
+            reservaModificada.Date,
+            reservaModificada.strat,
+            reservaModificada.end,
+            id);
 
         if (solapamientoUsuario)
             return new ServiceResponse<Reserv> { Success = false, Message = "El usuario ya tiene una reserva en ese horario." };
@@ -169,19 +155,19 @@ public class ReservationServices
         reservaEdit.strat = reservaModificada.strat;
         reservaEdit.end = reservaModificada.end;
 
-        _context.SaveChanges();
+        _reservationRepository.SaveChanges();
 
         return new ServiceResponse<Reserv> { Success = true, Data = reservaEdit, Message = "Reserva actualizada." };
     }
 
     public ServiceResponse<bool> EliminarReserva(int id)
     {
-        var reserva = _context.Reservas.FirstOrDefault(x => x.Id == id);
+        var reserva = _reservationRepository.GetById(id);
         if (reserva == null)
             return new ServiceResponse<bool> { Success = false, Message = "Reserva no encontrada." };
 
-        _context.Reservas.Remove(reserva);
-        _context.SaveChanges();
+        _reservationRepository.Remove(reserva);
+        _reservationRepository.SaveChanges();
 
         return new ServiceResponse<bool> { Success = true, Message = "Reserva eliminada." };
     }

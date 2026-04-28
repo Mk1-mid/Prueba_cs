@@ -18,13 +18,13 @@ namespace Desempeno.Data
 
             modelBuilder.Entity<Reserv>()
                 .HasOne(r => r.usuario)
-                .WithMany()
+                .WithMany(u => u.Reservas)
                 .HasForeignKey(r => r.IdUser)
                 .OnDelete(DeleteBehavior.Restrict); 
 
             modelBuilder.Entity<Reserv>()
                 .HasOne(r => r.sportSpace)
-                .WithMany()
+                .WithMany(s => s.Reservas)
                 .HasForeignKey(r => r.IdSpace)
                 .OnDelete(DeleteBehavior.Restrict);
         }

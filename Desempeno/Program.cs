@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Desempeno.Data;
 using Desempeno.services;
 using Desempeno.models;
+using Desempeno.repositories;
 
 public class Program
 {
@@ -17,14 +19,21 @@ public class Program
         if (string.IsNullOrWhiteSpace(connectionString))
             throw new InvalidOperationException("No se encontró ConnectionStrings:DefaultConnection en appsettings.json.");
 
-        var options = new DbContextOptionsBuilder<AppDbContext>()
-            .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
-            .Options;
+        var serviceCollection = new ServiceCollection();
+        serviceCollection.AddDbContext<AppDbContext>(options =>
+            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+        serviceCollection.AddScoped<IUserRepository, UserRepository>();
+        serviceCollection.AddScoped<ISportSpaceRepository, SportSpaceRepository>();
+        serviceCollection.AddScoped<IReservationRepository, ReservationRepository>();
+        serviceCollection.AddScoped<UserServices>();
+        serviceCollection.AddScoped<SportSpaceServices>();
+        serviceCollection.AddScoped<ReservationServices>();
 
-        using var context = new AppDbContext(options);
-        var userServ = new UserServices(context);
-        var spaceServ = new SportSpaceServices(context);
-        var reserveServ = new ReservationServices(context);
+        using var serviceProvider = serviceCollection.BuildServiceProvider();
+        using var scope = serviceProvider.CreateScope();
+        var userServ = scope.ServiceProvider.GetRequiredService<UserServices>();
+        var spaceServ = scope.ServiceProvider.GetRequiredService<SportSpaceServices>();
+        var reserveServ = scope.ServiceProvider.GetRequiredService<ReservationServices>();
 
         string? opcion;
         do

@@ -1,27 +1,27 @@
 using Desempeno.models;
-using Desempeno.Data;
+using Desempeno.repositories;
 
 namespace Desempeno.services;
 
 public class SportSpaceServices
 {
-    private readonly AppDbContext _context;
+    private readonly ISportSpaceRepository _sportSpaceRepository;
 
-    public SportSpaceServices(AppDbContext context)
+    public SportSpaceServices(ISportSpaceRepository sportSpaceRepository)
     {
-        _context = context;
+        _sportSpaceRepository = sportSpaceRepository;
     }
 
     public ServiceResponse<SportSpace> RegistrarEspacio(SportSpace newSpace)
     {
         try
         {
-            bool existe = _context.SportSpaces.Any(s => s.Id == newSpace.Id || s.Name == newSpace.Name);
+            bool existe = _sportSpaceRepository.ExistsByIdOrName(newSpace.Id, newSpace.Name);
             if (existe)
                 return new ServiceResponse<SportSpace> { Success = false, Message = "El espacio ya existe (Id o Nombre duplicado)." };
 
-            _context.SportSpaces.Add(newSpace);
-            _context.SaveChanges();
+            _sportSpaceRepository.Add(newSpace);
+            _sportSpaceRepository.SaveChanges();
 
             return new ServiceResponse<SportSpace> { Success = true, Data = newSpace, Message = "Espacio registrado con éxito." };
         }
@@ -35,7 +35,7 @@ public class SportSpaceServices
     {
         try
         {
-            var lista = _context.SportSpaces.ToList();
+            var lista = _sportSpaceRepository.GetAll();
             return new ServiceResponse<List<SportSpace>> { Success = true, Data = lista };
         }
         catch (Exception ex)
@@ -48,9 +48,7 @@ public class SportSpaceServices
     {
         try
         {
-            var lista = _context.SportSpaces
-                .Where(s => s.Tipe.ToLower() == tipo.ToLower())
-                .ToList();
+            var lista = _sportSpaceRepository.FilterByType(tipo);
 
             if (!lista.Any())
                 return new ServiceResponse<List<SportSpace>> { Success = false, Message = $"No hay espacios de tipo '{tipo}'." };
@@ -67,7 +65,7 @@ public class SportSpaceServices
     {
         try
         {
-            var spaceEdit = _context.SportSpaces.FirstOrDefault(x => x.Id == id);
+            var spaceEdit = _sportSpaceRepository.GetById(id);
             if (spaceEdit == null)
                 return new ServiceResponse<SportSpace> { Success = false, Message = "Espacio no encontrado." };
 
@@ -75,7 +73,7 @@ public class SportSpaceServices
             spaceEdit.Tipe = spaceModificado.Tipe;
             spaceEdit.capacity = spaceModificado.capacity;
 
-            _context.SaveChanges();
+            _sportSpaceRepository.SaveChanges();
 
             return new ServiceResponse<SportSpace> { Success = true, Data = spaceEdit, Message = "Espacio actualizado." };
         }
@@ -89,12 +87,12 @@ public class SportSpaceServices
     {
         try
         {
-            var space = _context.SportSpaces.FirstOrDefault(x => x.Id == id);
+            var space = _sportSpaceRepository.GetById(id);
             if (space == null)
                 return new ServiceResponse<bool> { Success = false, Message = "Espacio no encontrado." };
 
-            _context.SportSpaces.Remove(space);
-            _context.SaveChanges();
+            _sportSpaceRepository.Remove(space);
+            _sportSpaceRepository.SaveChanges();
 
             return new ServiceResponse<bool> { Success = true, Message = "Espacio eliminado." };
         }

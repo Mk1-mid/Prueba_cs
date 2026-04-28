@@ -14,8 +14,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59c4e31f-331c-4c31-b5e3-6242e8cda2ce" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Desempeno/Data/AppDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/Data/AppDbContext.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Desempeno/Desempeno.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/Desempeno.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Desempeno/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Desempeno/models/Reserv.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/models/Reserv.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Desempeno/models/SportSpace.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/models/SportSpace.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Desempeno/models/Users.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/models/Users.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Desempeno/obj/Debug/net10.0/Desempeno.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/obj/Debug/net10.0/Desempeno.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Desempeno/obj/Debug/net10.0/Desempeno.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/obj/Debug/net10.0/Desempeno.AssemblyInfoInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Desempeno/obj/Debug/net10.0/Desempeno.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/obj/Debug/net10.0/Desempeno.assets.cache" afterDir="false" />
@@ -28,6 +32,7 @@
       <change beforePath="$PROJECT_DIR$/Desempeno/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/obj/rider.project.restore.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Desempeno/services/ReservationServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/services/ReservationServices.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Desempeno/services/SportSpaceServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/services/SportSpaceServices.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Desempeno/services/UserServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/services/UserServices.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +127,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1777317910952</updated>
-      <workItem from="1777317912076" duration="14451000" />
+      <workItem from="1777317912076" duration="15417000" />
     </task>
     <task id="LOCAL-00001" summary="firts commit">
       <option name="closed" value="true" />
@@ -212,7 +217,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777330894794</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="migration solution">
+      <option name="closed" value="true" />
+      <created>1777334839083</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1777334839083</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,7 +257,8 @@
     <MESSAGE value="act Appdb" />
     <MESSAGE value="Act services" />
     <MESSAGE value="change menus" />
-    <option name="LAST_COMMIT_MESSAGE" value="change menus" />
+    <MESSAGE value="migration solution" />
+    <option name="LAST_COMMIT_MESSAGE" value="migration solution" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

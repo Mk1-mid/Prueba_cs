@@ -1,42 +1,41 @@
 using Desempeno.models;
-using Desempeno.Data;
+using Desempeno.repositories;
 
 namespace Desempeno.services;
 
 public class UserServices
 {
-    private readonly AppDbContext _context;
+    private readonly IUserRepository _userRepository;
 
-    
-    public UserServices(AppDbContext context)
+    public UserServices(IUserRepository userRepository)
     {
-        _context = context;
+        _userRepository = userRepository;
     }
 
     public ServiceResponse<Users> RegistrarUsuario(Users newUser)
     {
-        bool existe = _context.Users.Any(u => u.Id == newUser.Id || u.Email == newUser.Email);
+        bool existe = _userRepository.ExistsByIdOrEmail(newUser.Id, newUser.Email);
         
         if (existe)
         {
             return new ServiceResponse<Users> { Success = false, Message = "El usuario ya existe (Documento o Email duplicado)." };
         }
 
-        _context.Users.Add(newUser);
-        _context.SaveChanges();
+        _userRepository.Add(newUser);
+        _userRepository.SaveChanges();
         
         return new ServiceResponse<Users> { Success = true, Data = newUser, Message = "Usuario registrado con éxito." };
     }
 
     public ServiceResponse<List<Users>> ListarUsuarios()
     {
-        var lista = _context.Users.ToList();
+        var lista = _userRepository.GetAll();
         return new ServiceResponse<List<Users>> { Success = true, Data = lista };
     }
 
     public ServiceResponse<Users> EditarUsuario(int id, Users userModificado)
     {
-        var userEdit = _context.Users.FirstOrDefault(x => x.Id == id);
+        var userEdit = _userRepository.GetById(id);
         
         if (userEdit == null)
             return new ServiceResponse<Users> { Success = false, Message = "Usuario no encontrado." };
@@ -46,19 +45,19 @@ public class UserServices
         userEdit.Email = userModificado.Email;
         userEdit.Phone = userModificado.Phone;
 
-        _context.SaveChanges();
+        _userRepository.SaveChanges();
         
         return new ServiceResponse<Users> { Success = true, Data = userEdit, Message = "Usuario actualizado." };
     }
 
     public ServiceResponse<bool> EliminarUsuario(int id)
     {
-        var user = _context.Users.FirstOrDefault(x => x.Id == id);
+        var user = _userRepository.GetById(id);
         if (user == null)
             return new ServiceResponse<bool> { Success = false, Message = "Usuario no encontrado." };
 
-        _context.Users.Remove(user);
-        _context.SaveChanges();
+        _userRepository.Remove(user);
+        _userRepository.SaveChanges();
         
         return new ServiceResponse<bool> { Success = true, Message = "Usuario eliminado." };
     }
