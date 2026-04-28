@@ -14,11 +14,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59c4e31f-331c-4c31-b5e3-6242e8cda2ce" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Desempeno/Data/AppDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/Data/AppDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Desempeno/Desempeno.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/Desempeno.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Desempeno/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Desempeno/obj/Debug/net10.0/Desempeno.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/obj/Debug/net10.0/Desempeno.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Desempeno/obj/Debug/net10.0/Desempeno.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/obj/Debug/net10.0/Desempeno.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Desempeno/obj/Debug/net10.0/Desempeno.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/obj/Debug/net10.0/Desempeno.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Desempeno/obj/Desempeno.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/obj/Desempeno.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Desempeno/obj/Desempeno.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/obj/Desempeno.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Desempeno/obj/Desempeno.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/obj/Desempeno.csproj.nuget.g.targets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Desempeno/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Desempeno/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Desempeno/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Desempeno/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/obj/rider.project.restore.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Desempeno/services/ReservationServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/services/ReservationServices.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Desempeno/services/SportSpaceServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/services/SportSpaceServices.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Desempeno/services/UserServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Desempeno/services/UserServices.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +122,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1777317910952</updated>
-      <workItem from="1777317912076" duration="11788000" />
+      <workItem from="1777317912076" duration="14451000" />
     </task>
     <task id="LOCAL-00001" summary="firts commit">
       <option name="closed" value="true" />
@@ -187,7 +196,23 @@
       <option name="project" value="LOCAL" />
       <updated>1777329946938</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Act services">
+      <option name="closed" value="true" />
+      <created>1777330649448</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1777330649448</updated>
+    </task>
+    <task id="LOCAL-00011" summary="change menus">
+      <option name="closed" value="true" />
+      <created>1777330894794</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1777330894794</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,7 +242,9 @@
     <MESSAGE value="act" />
     <MESSAGE value="add Services" />
     <MESSAGE value="act Appdb" />
-    <option name="LAST_COMMIT_MESSAGE" value="act Appdb" />
+    <MESSAGE value="Act services" />
+    <MESSAGE value="change menus" />
+    <option name="LAST_COMMIT_MESSAGE" value="change menus" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

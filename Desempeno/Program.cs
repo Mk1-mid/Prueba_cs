@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Desempeno.Data;
 using Desempeno.services;
 using Desempeno.models;
@@ -7,7 +8,15 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        const string connectionString = "server=localhost;database=desempeno;user=root;password=;";
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false)
+            .Build();
+
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        if (string.IsNullOrWhiteSpace(connectionString))
+            throw new InvalidOperationException("No se encontró ConnectionStrings:DefaultConnection en appsettings.json.");
+
         var options = new DbContextOptionsBuilder<AppDbContext>()
             .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
             .Options;
@@ -21,7 +30,7 @@ public class Program
         do
         {
             Console.Clear();
-            Console.WriteLine("--- SISTEMA DE RESERVAS DEPORTIVAS ---");
+            Console.WriteLine("SISTEMA DE RESERVAS DEPORTIVAS");
             Console.WriteLine("1. Gestión de Usuarios");
             Console.WriteLine("2. Gestión de Espacios Deportivos");
             Console.WriteLine("3. Gestión de Reservas");
@@ -46,7 +55,7 @@ public class Program
         do
         {
             Console.Clear();
-            Console.WriteLine("--- GESTIÓN DE USUARIOS ---");
+            Console.WriteLine("GESTIÓN DE USUARIOS");
             Console.WriteLine("1. Registrar nuevo usuario");
             Console.WriteLine("2. Editar usuario");
             Console.WriteLine("3. Listar todos los usuarios");
@@ -85,7 +94,7 @@ public class Program
         do
         {
             Console.Clear();
-            Console.WriteLine("--- GESTIÓN DE Reservas ---");
+            Console.WriteLine("GESTIÓN DE RESERVAS");
             Console.WriteLine("1. crear Reserva");
             Console.WriteLine("2. Listar reservas");
             Console.WriteLine("3. Editar reserva");
@@ -105,7 +114,7 @@ public class Program
                     EditarReserva(reserveServ);
                     break;
                 case "4":
-                    EliminarReserva(reserveServ);
+                    CancelarReserva(reserveServ);
                     break;
                 case "5":
                     break;
@@ -123,7 +132,7 @@ public class Program
         do
         {
             Console.Clear();
-            Console.WriteLine("--- GESTIÓN DE Espacio ---");
+            Console.WriteLine("GESTIÓN DE ESPACIOS");
             Console.WriteLine("1. crear Espacio");
             Console.WriteLine("2. editar Espacio");
             Console.WriteLine("3. Listar espacios");
@@ -271,7 +280,6 @@ public class Program
         {
             IdUser = LeerEntero("Id usuario: "),
             IdSpace = LeerEntero("Id espacio: "),
-            status = LeerTexto("Estado: "),
             Date = LeerFecha("Fecha (yyyy-MM-dd): "),
             strat = LeerHora("Hora inicio (HH:mm): "),
             end = LeerHora("Hora fin (HH:mm): ")
@@ -318,10 +326,10 @@ public class Program
         Pausa();
     }
 
-    static void EliminarReserva(ReservationServices reserveServ)
+    static void CancelarReserva(ReservationServices reserveServ)
     {
         int id = LeerEntero("Id de la reserva a cancelar: ");
-        var response = reserveServ.EliminarReserva(id);
+        var response = reserveServ.CancelarReserva(id);
         Console.WriteLine(response.Message);
         Pausa();
     }
