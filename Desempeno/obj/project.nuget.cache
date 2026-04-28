@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "28aTKjr/pnQ=",
-  "success": true,
+  "dgSpecHash": "6gVQHR1ppdU=",
+  "success": false,
   "projectFilePath": "/home/cohorte6/Escritorio/prueba_desempeño/Desempeno/Desempeno.csproj",
   "expectedPackageFiles": [
+    "/home/cohorte6/.nuget/packages/bouncycastle.cryptography/2.6.2/bouncycastle.cryptography.2.6.2.nupkg.sha512",
     "/home/cohorte6/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
+    "/home/cohorte6/.nuget/packages/mailkit/4.16.0/mailkit.4.16.0.nupkg.sha512",
     "/home/cohorte6/.nuget/packages/microsoft.bcl.asyncinterfaces/7.0.0/microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "/home/cohorte6/.nuget/packages/microsoft.build.framework/17.8.3/microsoft.build.framework.17.8.3.nupkg.sha512",
     "/home/cohorte6/.nuget/packages/microsoft.build.locator/1.7.8/microsoft.build.locator.1.7.8.nupkg.sha512",
@@ -23,7 +25,8 @@
     "/home/cohorte6/.nuget/packages/microsoft.extensions.caching.abstractions/9.0.0/microsoft.extensions.caching.abstractions.9.0.0.nupkg.sha512",
     "/home/cohorte6/.nuget/packages/microsoft.extensions.caching.memory/9.0.0/microsoft.extensions.caching.memory.9.0.0.nupkg.sha512",
     "/home/cohorte6/.nuget/packages/microsoft.extensions.configuration/10.0.0/microsoft.extensions.configuration.10.0.0.nupkg.sha512",
-    "/home/cohorte6/.nuget/packages/microsoft.extensions.configuration.abstractions/10.0.0/microsoft.extensions.configuration.abstractions.10.0.0.nupkg.sha512",
+    "/home/cohorte6/.nuget/packages/microsoft.extensions.configuration.abstractions/10.0.7/microsoft.extensions.configuration.abstractions.10.0.7.nupkg.sha512",
+    "/home/cohorte6/.nuget/packages/microsoft.extensions.configuration.environmentvariables/10.0.7/microsoft.extensions.configuration.environmentvariables.10.0.7.nupkg.sha512",
     "/home/cohorte6/.nuget/packages/microsoft.extensions.configuration.fileextensions/10.0.0/microsoft.extensions.configuration.fileextensions.10.0.0.nupkg.sha512",
     "/home/cohorte6/.nuget/packages/microsoft.extensions.configuration.json/10.0.0/microsoft.extensions.configuration.json.10.0.0.nupkg.sha512",
     "/home/cohorte6/.nuget/packages/microsoft.extensions.dependencyinjection/10.0.0/microsoft.extensions.dependencyinjection.10.0.0.nupkg.sha512",
@@ -35,7 +38,8 @@
     "/home/cohorte6/.nuget/packages/microsoft.extensions.logging/9.0.0/microsoft.extensions.logging.9.0.0.nupkg.sha512",
     "/home/cohorte6/.nuget/packages/microsoft.extensions.logging.abstractions/9.0.0/microsoft.extensions.logging.abstractions.9.0.0.nupkg.sha512",
     "/home/cohorte6/.nuget/packages/microsoft.extensions.options/9.0.0/microsoft.extensions.options.9.0.0.nupkg.sha512",
-    "/home/cohorte6/.nuget/packages/microsoft.extensions.primitives/10.0.0/microsoft.extensions.primitives.10.0.0.nupkg.sha512",
+    "/home/cohorte6/.nuget/packages/microsoft.extensions.primitives/10.0.7/microsoft.extensions.primitives.10.0.7.nupkg.sha512",
+    "/home/cohorte6/.nuget/packages/mimekit/4.16.0/mimekit.4.16.0.nupkg.sha512",
     "/home/cohorte6/.nuget/packages/mono.texttemplating/3.0.0/mono.texttemplating.3.0.0.nupkg.sha512",
     "/home/cohorte6/.nuget/packages/mysqlconnector/2.4.0/mysqlconnector.2.4.0.nupkg.sha512",
     "/home/cohorte6/.nuget/packages/pomelo.entityframeworkcore.mysql/9.0.0/pomelo.entityframeworkcore.mysql.9.0.0.nupkg.sha512",
@@ -45,7 +49,20 @@
     "/home/cohorte6/.nuget/packages/system.composition.convention/7.0.0/system.composition.convention.7.0.0.nupkg.sha512",
     "/home/cohorte6/.nuget/packages/system.composition.hosting/7.0.0/system.composition.hosting.7.0.0.nupkg.sha512",
     "/home/cohorte6/.nuget/packages/system.composition.runtime/7.0.0/system.composition.runtime.7.0.0.nupkg.sha512",
-    "/home/cohorte6/.nuget/packages/system.composition.typedparts/7.0.0/system.composition.typedparts.7.0.0.nupkg.sha512"
+    "/home/cohorte6/.nuget/packages/system.composition.typedparts/7.0.0/system.composition.typedparts.7.0.0.nupkg.sha512",
+    "/home/cohorte6/.nuget/packages/system.security.cryptography.pkcs/10.0.0/system.security.cryptography.pkcs.10.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Error",
+      "message": "Warning As Error: Detected package downgrade: Microsoft.Extensions.Configuration from 10.0.7 to 10.0.0. Reference the package directly from the project to select a different version. \n Desempeno -> Microsoft.Extensions.Configuration.EnvironmentVariables 10.0.7 -> Microsoft.Extensions.Configuration (>= 10.0.7) \n Desempeno -> Microsoft.Extensions.Configuration (>= 10.0.0)",
+      "projectPath": "/home/cohorte6/Escritorio/prueba_desempeño/Desempeno/Desempeno.csproj",
+      "filePath": "/home/cohorte6/Escritorio/prueba_desempeño/Desempeno/Desempeno.csproj",
+      "libraryId": "Microsoft.Extensions.Configuration",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
 }

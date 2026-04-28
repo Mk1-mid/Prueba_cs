@@ -62,7 +62,7 @@ namespace Desempeno.Migrations
                     status = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    strat = table.Column<TimeSpan>(type: "time(6)", nullable: false),
+                    start = table.Column<TimeSpan>(type: "time(6)", nullable: false),
                     end = table.Column<TimeSpan>(type: "time(6)", nullable: false)
                 },
                 constraints: table =>

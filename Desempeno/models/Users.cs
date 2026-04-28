@@ -8,6 +8,7 @@ public class Users
   [Required]
   public int Id { get; set; }
 
+  public string Document { get; set; } = string.Empty;
   [Required]
   [StringLength(100)]
   public string Name { get; set; } = string.Empty;

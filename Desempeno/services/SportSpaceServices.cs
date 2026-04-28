@@ -3,7 +3,7 @@ using Desempeno.repositories;
 
 namespace Desempeno.services;
 
-public class SportSpaceServices
+public class SportSpaceServices : ServiceBase
 {
     private readonly ISportSpaceRepository _sportSpaceRepository;
 
@@ -14,60 +14,48 @@ public class SportSpaceServices
 
     public ServiceResponse<SportSpace> RegistrarEspacio(SportSpace newSpace)
     {
-        try
+        return EjecutarConError(() =>
         {
             bool existe = _sportSpaceRepository.ExistsByIdOrName(newSpace.Id, newSpace.Name);
             if (existe)
-                return new ServiceResponse<SportSpace> { Success = false, Message = "El espacio ya existe (Id o Nombre duplicado)." };
+                return ServiceResponse<SportSpace>.Error("El espacio ya existe (Id o Nombre duplicado).");
 
             _sportSpaceRepository.Add(newSpace);
             _sportSpaceRepository.SaveChanges();
 
-            return new ServiceResponse<SportSpace> { Success = true, Data = newSpace, Message = "Espacio registrado con éxito." };
-        }
-        catch (Exception ex)
-        {
-            return new ServiceResponse<SportSpace> { Success = false, Message = $"Error: {ex.Message}" };
-        }
+            return ServiceResponse<SportSpace>.Ok(newSpace, "Espacio registrado con éxito.");
+        });
     }
 
     public ServiceResponse<List<SportSpace>> ListarEspacios()
     {
-        try
+        return EjecutarConError(() =>
         {
             var lista = _sportSpaceRepository.GetAll();
-            return new ServiceResponse<List<SportSpace>> { Success = true, Data = lista };
-        }
-        catch (Exception ex)
-        {
-            return new ServiceResponse<List<SportSpace>> { Success = false, Message = $"Error: {ex.Message}" };
-        }
+            return ServiceResponse<List<SportSpace>>.Ok(lista);
+        });
     }
 
     public ServiceResponse<List<SportSpace>> FiltrarPorTipo(string tipo)
     {
-        try
+        return EjecutarConError(() =>
         {
             var lista = _sportSpaceRepository.FilterByType(tipo);
 
             if (!lista.Any())
-                return new ServiceResponse<List<SportSpace>> { Success = false, Message = $"No hay espacios de tipo '{tipo}'." };
+                return ServiceResponse<List<SportSpace>>.Error($"No hay espacios de tipo '{tipo}'.");
 
-            return new ServiceResponse<List<SportSpace>> { Success = true, Data = lista };
-        }
-        catch (Exception ex)
-        {
-            return new ServiceResponse<List<SportSpace>> { Success = false, Message = $"Error: {ex.Message}" };
-        }
+            return ServiceResponse<List<SportSpace>>.Ok(lista);
+        });
     }
 
     public ServiceResponse<SportSpace> EditarEspacio(int id, SportSpace spaceModificado)
     {
-        try
+        return EjecutarConError(() =>
         {
             var spaceEdit = _sportSpaceRepository.GetById(id);
             if (spaceEdit == null)
-                return new ServiceResponse<SportSpace> { Success = false, Message = "Espacio no encontrado." };
+                return ServiceResponse<SportSpace>.Error("Espacio no encontrado.");
 
             spaceEdit.Name = spaceModificado.Name;
             spaceEdit.Tipe = spaceModificado.Tipe;
@@ -75,30 +63,22 @@ public class SportSpaceServices
 
             _sportSpaceRepository.SaveChanges();
 
-            return new ServiceResponse<SportSpace> { Success = true, Data = spaceEdit, Message = "Espacio actualizado." };
-        }
-        catch (Exception ex)
-        {
-            return new ServiceResponse<SportSpace> { Success = false, Message = $"Error: {ex.Message}" };
-        }
+            return ServiceResponse<SportSpace>.Ok(spaceEdit, "Espacio actualizado.");
+        });
     }
 
     public ServiceResponse<bool> EliminarEspacio(int id)
     {
-        try
+        return EjecutarConError(() =>
         {
             var space = _sportSpaceRepository.GetById(id);
             if (space == null)
-                return new ServiceResponse<bool> { Success = false, Message = "Espacio no encontrado." };
+                return ServiceResponse<bool>.Error("Espacio no encontrado.");
 
             _sportSpaceRepository.Remove(space);
             _sportSpaceRepository.SaveChanges();
 
-            return new ServiceResponse<bool> { Success = true, Message = "Espacio eliminado." };
-        }
-        catch (Exception ex)
-        {
-            return new ServiceResponse<bool> { Success = false, Message = $"Error: {ex.Message}" };
-        }
+            return ServiceResponse<bool>.Ok(true, "Espacio eliminado.");
+        });
     }
 }

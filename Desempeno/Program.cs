@@ -12,12 +12,14 @@ public class Program
     {
         var configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false)
+            .AddJsonFile("appsettings.json", optional: true)
+            .AddJsonFile("appsettings.Local.json", optional: true)
+            .AddEnvironmentVariables()
             .Build();
 
         var connectionString = configuration.GetConnectionString("DefaultConnection");
         if (string.IsNullOrWhiteSpace(connectionString))
-            throw new InvalidOperationException("No se encontró ConnectionStrings:DefaultConnection en appsettings.json.");
+            throw new InvalidOperationException("No se encontró ConnectionStrings:DefaultConnection. Defínala en appsettings.Local.json o una variable de entorno.");
 
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddDbContext<AppDbContext>(options =>
@@ -290,7 +292,7 @@ public class Program
             IdUser = LeerEntero("Id usuario: "),
             IdSpace = LeerEntero("Id espacio: "),
             Date = LeerFecha("Fecha (yyyy-MM-dd): "),
-            strat = LeerHora("Hora inicio (HH:mm): "),
+            start = LeerHora("Hora inicio (HH:mm): "),
             end = LeerHora("Hora fin (HH:mm): ")
         };
 
@@ -312,7 +314,7 @@ public class Program
         foreach (var r in response.Data)
         {
             Console.WriteLine(
-                $"Id: {r.Id} | Usuario: {r.IdUser} | Espacio: {r.IdSpace} | Fecha: {r.Date:yyyy-MM-dd} | {r.strat:hh\\:mm}-{r.end:hh\\:mm} | Estado: {r.status}");
+                $"Id: {r.Id} | Usuario: {r.IdUser} | Espacio: {r.IdSpace} | Fecha: {r.Date:yyyy-MM-dd} | {r.start:hh\\:mm}-{r.end:hh\\:mm} | Estado: {r.status}");
         }
         Pausa();
     }
@@ -326,7 +328,7 @@ public class Program
             IdSpace = LeerEntero("Nuevo Id espacio: "),
             status = LeerTexto("Nuevo estado: "),
             Date = LeerFecha("Nueva fecha (yyyy-MM-dd): "),
-            strat = LeerHora("Nueva hora inicio (HH:mm): "),
+            start = LeerHora("Nueva hora inicio (HH:mm): "),
             end = LeerHora("Nueva hora fin (HH:mm): ")
         };
 

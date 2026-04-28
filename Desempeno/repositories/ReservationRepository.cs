@@ -22,7 +22,7 @@ public class ReservationRepository : IReservationRepository
             r.IdSpace == spaceId &&
             r.Date == date &&
             r.status != "Cancelada" &&
-            r.strat < end &&
+            r.start < end &&
             r.end > start &&
             (!excludeReservationId.HasValue || r.Id != excludeReservationId.Value));
 
@@ -31,7 +31,7 @@ public class ReservationRepository : IReservationRepository
             r.IdUser == userId &&
             r.Date == date &&
             r.status != "Cancelada" &&
-            r.strat < end &&
+            r.start < end &&
             r.end > start &&
             (!excludeReservationId.HasValue || r.Id != excludeReservationId.Value));
 

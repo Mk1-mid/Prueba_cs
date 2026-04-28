@@ -3,7 +3,7 @@ using Desempeno.repositories;
 
 namespace Desempeno.services;
 
-public class ReservationServices
+public class ReservationServices : ServiceBase
 {
     private readonly IReservationRepository _reservationRepository;
 
@@ -14,13 +14,14 @@ public class ReservationServices
 
     public ServiceResponse<Reserv> RegistrarReserva(Reserv newReserv)
     {
-        if (newReserv.Date.Date < DateTime.Today)
+        return EjecutarConError(() =>
+        {        if (newReserv.Date.Date < DateTime.Today)
             return new ServiceResponse<Reserv> { Success = false, Message = "No se pueden crear reservas en fechas pasadas." };
 
-        if (newReserv.Date.Date == DateTime.Today && newReserv.strat < DateTime.Now.TimeOfDay)
+        if (newReserv.Date.Date == DateTime.Today && newReserv.start < DateTime.Now.TimeOfDay)
             return new ServiceResponse<Reserv> { Success = false, Message = "La hora de inicio ya pasó." };
 
-        if (newReserv.end <= newReserv.strat)
+        if (newReserv.end <= newReserv.start)
             return new ServiceResponse<Reserv> { Success = false, Message = "La hora de fin debe ser mayor a la hora de inicio." };
 
         bool usuarioExiste = _reservationRepository.UserExists(newReserv.IdUser);
@@ -34,7 +35,7 @@ public class ReservationServices
         bool solapamientoEspacio = _reservationRepository.HasOverlapForSpace(
             newReserv.IdSpace,
             newReserv.Date,
-            newReserv.strat,
+            newReserv.start,
             newReserv.end);
 
         if (solapamientoEspacio)
@@ -43,7 +44,7 @@ public class ReservationServices
         bool solapamientoUsuario = _reservationRepository.HasOverlapForUser(
             newReserv.IdUser,
             newReserv.Date,
-            newReserv.strat,
+            newReserv.start,
             newReserv.end);
 
         if (solapamientoUsuario)
@@ -56,9 +57,10 @@ public class ReservationServices
 
         var usuario = _reservationRepository.GetUserById(newReserv.IdUser);
         Console.WriteLine(
-            $"Correo enviado a {usuario?.Email}. Reserva creada para el {newReserv.Date:yyyy-MM-dd} de {newReserv.strat:hh\\:mm} a {newReserv.end:hh\\:mm}.");
+            $"Correo enviado a {usuario?.Email}. Reserva creada para el {newReserv.Date:yyyy-MM-dd} de {newReserv.start:hh\\:mm} a {newReserv.end:hh\\:mm}.");
 
-        return new ServiceResponse<Reserv> { Success = true, Data = newReserv, Message = "Reserva registrada con éxito." };
+        return ServiceResponse<Reserv>.Ok(newReserv, "Reserva registrada con éxito.");
+        });
     }
 
     public ServiceResponse<List<Reserv>> ListarReservas()
@@ -107,7 +109,8 @@ public class ReservationServices
 
     public ServiceResponse<Reserv> EditarReserva(int id, Reserv reservaModificada)
     {
-        var reservaEdit = _reservationRepository.GetById(id);
+        return EjecutarConError(() =>
+        {        var reservaEdit = _reservationRepository.GetById(id);
         if (reservaEdit == null)
             return new ServiceResponse<Reserv> { Success = false, Message = "Reserva no encontrada." };
 
@@ -117,7 +120,7 @@ public class ReservationServices
         if (reservaModificada.Date.Date < DateTime.Today)
             return new ServiceResponse<Reserv> { Success = false, Message = "No se pueden usar fechas pasadas." };
 
-        if (reservaModificada.end <= reservaModificada.strat)
+        if (reservaModificada.end <= reservaModificada.start)
             return new ServiceResponse<Reserv> { Success = false, Message = "La hora de fin debe ser mayor a la hora de inicio." };
 
         bool usuarioExiste = _reservationRepository.UserExists(reservaModificada.IdUser);
@@ -131,7 +134,7 @@ public class ReservationServices
         bool solapamientoEspacio = _reservationRepository.HasOverlapForSpace(
             reservaModificada.IdSpace,
             reservaModificada.Date,
-            reservaModificada.strat,
+            reservaModificada.start,
             reservaModificada.end,
             id);
 
@@ -141,7 +144,7 @@ public class ReservationServices
         bool solapamientoUsuario = _reservationRepository.HasOverlapForUser(
             reservaModificada.IdUser,
             reservaModificada.Date,
-            reservaModificada.strat,
+            reservaModificada.start,
             reservaModificada.end,
             id);
 
@@ -152,12 +155,13 @@ public class ReservationServices
         reservaEdit.IdSpace = reservaModificada.IdSpace;
         reservaEdit.status = string.IsNullOrWhiteSpace(reservaModificada.status) ? "Programada" : reservaModificada.status;
         reservaEdit.Date = reservaModificada.Date;
-        reservaEdit.strat = reservaModificada.strat;
+        reservaEdit.start = reservaModificada.start;
         reservaEdit.end = reservaModificada.end;
 
         _reservationRepository.SaveChanges();
 
-        return new ServiceResponse<Reserv> { Success = true, Data = reservaEdit, Message = "Reserva actualizada." };
+        return ServiceResponse<Reserv>.Ok(reservaEdit, "Reserva actualizada.");
+        });
     }
 
     public ServiceResponse<bool> EliminarReserva(int id)

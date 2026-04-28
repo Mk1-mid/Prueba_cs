@@ -16,6 +16,11 @@ namespace Desempeno.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            // Unique index for Users.Document
+            modelBuilder.Entity<Users>()
+                .HasIndex(u => u.Document)
+                .IsUnique();
+
             modelBuilder.Entity<Reserv>()
                 .HasOne(r => r.usuario)
                 .WithMany(u => u.Reservas)

@@ -1,0 +1,15 @@
+# Build outputs
+**/bin/
+**/obj/
+
+# IDE
+.idea/
+
+# User-specific appsettings
+Desempeno/appsettings.Local.json
+Desempeno/appsettings.json
+
+# Other
+*.user
+*.vs
+

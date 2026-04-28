@@ -25,7 +25,7 @@ public class Reserv
     public DateTime Date { get; set; }
 
     [Required]
-    public TimeSpan strat { get; set; }
+    public TimeSpan start { get; set; }
 
     [Required]
     public TimeSpan end { get; set; }
